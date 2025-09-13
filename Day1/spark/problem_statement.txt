@@ -1,0 +1,21 @@
+Day 1 – Spark Question (Improved Beginner/Intermediate)
+
+You have a large CSV file in S3:
+s3://company-data/transactions.csv
+
+Schema of the file:
+
+transaction_id (string)
+customer_id (string)
+amount (decimal)
+transaction_date (yyyy-MM-dd string)
+
+Tasks:
+
+Read the CSV file as a DataFrame with explicit schema (not inferSchema).
+
+Repartition the DataFrame by customer_id into 10 partitions (why would you do this?).
+
+Compute total amount spent per customer and order by total amount descending.
+
+Write the result as Parquet back to S3, partitioned by transaction_date.
