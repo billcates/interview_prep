@@ -1,0 +1,25 @@
+The Duplicate Multiplication Trap
+
+-- Orders table
+| customer_id | order_date |
+|-------------|------------|
+| 1           | 2024-01-01 |
+| 1           | 2024-01-15 |
+| 2           | 2024-01-10 |
+
+-- Payments table
+| customer_id | amount |
+|-------------|--------|
+| 1           | 100    |
+| 1           | 200    |
+| 2           | 150    |
+
+
+Question: A developer writes this query to get total payments per customer:
+
+SELECT o.customer_id, SUM(p.amount) as total_payments
+FROM orders o 
+JOIN payments p ON o.customer_id = p.customer_id
+GROUP BY o.customer_id;
+
+What's wrong with this approach? What will the result be and why is it incorrect?
