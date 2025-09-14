@@ -1,0 +1,7 @@
+You have a table orders:
+
+order_id	customer_id	order_date	order_amount
+
+Task:
+Find the top 2 most recent orders per customer.
+If a customer has fewer than 2 orders, return only the available ones.
