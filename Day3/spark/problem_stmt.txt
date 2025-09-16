@@ -1,0 +1,19 @@
+You have a CSV file /mnt/data/customers.csv with this schema:
+customer_id (string)
+name (string)
+city (string)
+signup_date (string, format yyyy-MM-dd)
+
+And another CSV /mnt/data/orders.csv with this schema:
+order_id (string)
+customer_id (string)
+order_amount (decimal with 2 places)
+order_date (string, format yyyy-MM-dd)
+
+Task:
+Using PySpark:
+Read both CSVs with an explicitly defined schema.
+Join customers with orders on customer_id.
+Filter for only the customers who signed up in the last 30 days.
+For each city, calculate the average order_amount of these recent customers.
+Write the result to Delta format at /mnt/delta/city_order_summary/, partitioned by city.
