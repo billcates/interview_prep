@@ -1,0 +1,15 @@
+Day 3 SQL Question
+
+You have a table employee_sales with the following columns:
+
+employee_id
+
+region
+
+sale_date
+
+sale_amount
+
+Task:
+Write a SQL query to return, for each region, the top 3 employees by total sales amount in the last 90 days.
+If multiple employees tie on the 3rd rank, include them all.

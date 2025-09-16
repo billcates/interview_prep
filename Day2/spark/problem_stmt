@@ -1,0 +1,22 @@
+You have a Delta table stored at:
+/mnt/delta/orders/
+
+Schema:
+
+order_id (string)
+
+customer_id (string)
+
+order_date (timestamp)
+
+order_amount (decimal(10,2))
+
+Tasks:
+
+Read the Delta table into a PySpark DataFrame.
+
+Using a window function, find the top 2 most recent orders per customer (ties broken by order_amount descending).
+
+Write the resulting DataFrame as Parquet to a new location /mnt/parquet/top_orders/ partitioned by customer_id.
+
+Explain why you might partition the output by customer_id instead of order_date.
