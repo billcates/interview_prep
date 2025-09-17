@@ -1,0 +1,16 @@
+You have a table page_visits:
+
+column	type
+user_id	int
+page_url	varchar
+visit_time	timestamp
+
+Write a SQL query to:
+
+For each user_id, find the previous page visited (the URL) before the current one.
+
+Output columns: user_id, current_page_url, previous_page_url, visit_time.
+
+If there’s no previous page for that user, show NULL for previous_page_url.
+
+Results should be ordered by user_id and visit_time.
