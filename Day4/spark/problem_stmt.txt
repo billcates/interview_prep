@@ -1,0 +1,28 @@
+You have the following datasets:
+
+customers.csv
+| customer_id | name | city | signup_date |
+
+orders.csv
+| order_id | customer_id | order_amount | order_date |
+
+returns.csv
+| return_id | order_id | return_date |
+
+Task
+
+Using PySpark:
+
+Read all three files with proper schemas.
+Join them to produce a single DataFrame where:
+Every order is matched with its customer.
+If an order has been returned, include the return_date (otherwise NULL).
+
+For each customer_id, compute:
+Total orders in the last 90 days.
+Total order amount in the last 90 days.
+Number of returned orders in the last 90 days.
+Using a window function, assign each customer a “loyalty_rank” based on total order amount in the last 90 days (descending).
+Rank within each city.
+
+Write the result to Parquet partitioned by city and loyalty_rank (nested partitioning)
