@@ -1,0 +1,14 @@
+Topic: Sessionization / consecutive activity tracking
+
+Problem:
+You have a table user_logins with the following columns:
+
+user_id
+
+login_time (timestamp)
+
+For each user, define a session as consecutive logins where the gap between two logins is ≤ 30 minutes.
+
+Assign a session_id to each session per user.
+
+Return: user_id, login_time, session_id.
