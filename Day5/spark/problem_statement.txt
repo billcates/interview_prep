@@ -1,0 +1,30 @@
+You have two DataFrames:
+
+Products
+
+product_id	category	price
+P1	A	100
+P2	A	200
+P3	B	150
+P4	B	400
+
+Sales
+
+sale_id	product_id	quantity	sale_date
+S1	P1	2	2025-09-01
+S2	P1	3	2025-09-03
+S3	P2	1	2025-09-02
+S4	P3	5	2025-09-05
+Task
+
+Using PySpark DataFrame API:
+
+Join Sales and Products.
+
+For each category, calculate:
+Total quantity sold.
+Total sales amount (price * quantity).
+The product_id with the highest total sales amount in that category.
+
+Return a DataFrame with columns:
+category, total_quantity, total_sales_amount, top_product_id
