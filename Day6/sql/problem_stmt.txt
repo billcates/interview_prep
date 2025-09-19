@@ -1,0 +1,27 @@
+You have a table orders:
+
+order_id	user_id	order_date	order_amount
+1	A	2024-01-01 10:00	100
+2	A	2024-01-05 12:00	150
+3	A	2024-02-10 15:00	200
+4	B	2024-01-02 09:00	80
+5	B	2024-03-01 18:00	120
+
+Task:
+For each user_id and each calendar month:
+Find the total order_amount in that month.
+Compare it with the previous month’s total order_amount for the same user.
+
+Output:
+
+user_id
+month (YYYY-MM)
+monthly_total
+previous_month_total
+growth_percent ((current - previous)/previous * 100, NULL if previous is zero or NULL)
+
+Requirements:
+
+Only SQL
+Should work even if a user has skipped a month (NULL previous).
+Use window functions, not self joins.
