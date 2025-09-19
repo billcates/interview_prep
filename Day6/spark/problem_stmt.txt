@@ -1,0 +1,25 @@
+You have the following two DataFrames:
+
+clicks_df
+
+user_id (string)
+page_url (string)
+click_time (timestamp)
+
+products_df
+
+page_url (string)
+product_category (string)
+
+Task:
+
+Join both DataFrames so that each click gets its product_category.
+For each user_id and product_category, find the total number of clicks in the last 7 days (relative to the current date).
+Within each product_category, rank users by total clicks in the last 7 days (most clicks → rank 1).
+
+Output a DataFrame containing:
+
+user_id
+product_category
+total_clicks_last_7_days
+rank_in_category
