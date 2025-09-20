@@ -1,0 +1,19 @@
+You have a table employee_attendance:
+
+emp_id	emp_name	attendance_date	status
+1	Alice	2025-09-01	Present
+1	Alice	2025-09-02	Absent
+2	Bob	2025-09-01	Present
+2	Bob	2025-09-02	Present
+3	Carol	2025-09-01	Absent
+3	Carol	2025-09-02	Present
+
+Task
+
+Write an SQL query to produce a monthly attendance summary per employee with these columns:
+
+emp_id
+month (YYYY-MM)
+total working days in that month
+total present days
+total absent days
