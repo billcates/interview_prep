@@ -1,0 +1,28 @@
+You’re given two DataFrames:
+
+transactions_df
+
+transaction_id
+customer_id
+product_id
+transaction_date (timestamp)
+amount
+
+products_df
+
+product_id
+category
+
+Task:
+Using PySpark DataFrame APIs, write code to:
+
+Join the two DataFrames to add category to each transaction.
+For each customer and category, calculate:
+
+total spend in the last 30 days from today
+number of unique products purchased in that period
+
+For each category, rank customers by total spend in the last 30 days (highest spend gets rank 1).
+
+Return a DataFrame with:
+customer_id, category, total_spend_last_30_days, unique_products_last_30_days, and rank_in_category.
