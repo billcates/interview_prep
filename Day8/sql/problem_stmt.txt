@@ -1,0 +1,25 @@
+You are given a table sales with the following columns:
+
+Column	Type
+sale_id	INT
+customer_id	INT
+product_id	INT
+sale_date	DATE
+amount	DECIMAL
+
+And a table products with:
+
+Column	Type
+product_id	INT
+category	VARCHAR
+
+Task
+
+For each customer and each category, calculate the following for the last 90 days:
+
+Total sales amount
+Total number of unique products purchased
+The customer’s ranking within the category based on the total sales amount (highest to lowest)
+
+Return:
+customer_id | category | total_sales_amount | unique_products | rank_in_category
