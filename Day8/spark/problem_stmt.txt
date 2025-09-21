@@ -1,0 +1,14 @@
+You’re given a streaming clickstream dataset where each user can click many pages in a session.
+You need to identify user sessions using a 30-minute inactivity gap:
+
+If the time between two consecutive clicks for the same user is more than 30 minutes, start a new session.
+
+Assign a session_id per user for each session.
+
+For each session, compute:
+
+Total number of clicks
+
+The first click time and the last click time
+
+Session duration in minutes
