@@ -1,0 +1,11 @@
+For each region, calculate the cumulative sales for each employee ordered by sale_date.
+Also compute a running rank within each region based on the cumulative sales.
+
+Produce the final table with:
+
+region
+employee_id
+sale_date
+sale_amount
+cumulative_sales
+rank_in_region
