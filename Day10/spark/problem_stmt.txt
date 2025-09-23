@@ -1,0 +1,35 @@
+You have a user_activity DataFrame with the following schema:
+
+column	type	description
+user_id	string	ID of the user
+activity_date	date	Date the user performed an activity
+activity_type	string	Type of activity (“login”, “purchase”, etc)
+
+Task:
+For each user_id and activity_type, calculate the streaks of consecutive days where the user performed that activity without a break.
+Return a DataFrame with:
+
+user_id
+activity_type
+streak_id (incremental id per streak per user/activity_type)
+streak_start_date
+streak_end_date
+streak_length (number of consecutive days in the streak)
+
+Example Input:
+
+user_id	activity_date	activity_type
+U1	2025-09-01	login
+U1	2025-09-02	login
+U1	2025-09-04	login
+U1	2025-09-05	login
+U2	2025-09-01	purchase
+U2	2025-09-03	purchase
+
+Expected Output (illustrative):
+
+user_id	activity_type	streak_id	streak_start_date	streak_end_date	streak_length
+U1	login	1	2025-09-01	2025-09-02	2
+U1	login	2	2025-09-04	2025-09-05	2
+U2	purchase	1	2025-09-01	2025-09-01	1
+U2	purchase	2	2025-09-03	2025-09-03	1
