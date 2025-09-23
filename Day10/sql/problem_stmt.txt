@@ -1,0 +1,12 @@
+You’re given an employee hierarchy table:
+
+emp_id	emp_name	manager_id	department	salary
+1	Alice	NULL	HR	120000
+2	Bob	1	HR	90000
+3	Carol	1	Finance	110000
+4	Dave	2	HR	75000
+5	Eve	2	Finance	70000
+6	Frank	3	Finance	65000
+
+Task:
+Write a SQL query to produce a hierarchy showing all employees under each manager recursively and also show their level of hierarchy (1 for direct reports, 2 for indirect, etc.).
