@@ -1,0 +1,26 @@
+You’re given a table website_events with the following structure:
+
+Column Name	Data Type
+user_id	INT
+event_time	TIMESTAMP
+page_url	VARCHAR
+event_type	VARCHAR
+
+Sample event_type values: view, add_to_cart, purchase.
+
+Task:
+For each user, find their conversion funnel in order —
+
+first event_time they viewed something,
+first event_time they added_to_cart after that view,
+first event_time they purchased after the add_to_cart — all within the same session (say, within 30 minutes of each other).
+
+Your output should be:
+
+| user_id | first_view_time | first_add_to_cart_time | first_purchase_time |
+
+Notes / Constraints:
+
+All three events must be within 30 minutes of each other (view → add_to_cart → purchase).
+If a user didn’t add to cart or purchase, show NULL for that column.
+If multiple funnels exist, take the earliest complete funnel.
