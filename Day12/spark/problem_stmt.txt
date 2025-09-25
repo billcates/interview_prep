@@ -1,0 +1,21 @@
+You have a large dataset of web server logs stored as a DataFrame:
+
+Column Name	Data Type	Description
+log_time	timestamp	Timestamp of the log entry
+user_id	string	User identifier
+url	string	Page URL visited
+response_time	double	Server response time in milliseconds
+status_code	int	HTTP status code (200, 404, 500…)
+
+Task:
+
+Identify slow endpoints for each URL by calculating the 95th percentile response time (response_time) per URL.
+Find URLs that have more than 1% failed requests (status_code >= 400) over the total requests for that URL.
+
+Combine these two metrics to produce a “critical URL” list, containing:
+
+url
+p95_response_time
+failure_percentage
+
+Output should be sorted by p95_response_time descending
