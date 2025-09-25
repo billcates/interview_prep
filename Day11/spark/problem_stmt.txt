@@ -1,0 +1,32 @@
+“Rolling Revenue with Product Ranking”
+Input DataFrames
+
+orders_df
+
+Column	Type	Example
+order_id	INT	101
+user_id	INT	1
+product_id	INT	10
+order_date	DATE	2025-09-01
+amount	DOUBLE	250.00
+
+products_df
+
+Column	Type	Example
+product_id	INT	10
+category	STRING	“electronics”
+Task
+
+Using Spark DataFrame API:
+
+Join orders_df and products_df to get category for each order.
+
+For each user_id & category, compute:
+
+A 7-day rolling sum of the amount based on order_date.
+A rank of each category per user based on this rolling sum for each date.
+
+Return only the top 2 categories per user per day (based on the rolling sum).
+
+Expected Output Columns
+| user_id | order_date | category | rolling_7d_amount | rank_in_user |
