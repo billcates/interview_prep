@@ -1,0 +1,20 @@
+Table: orders
+Column Name	Data Type
+order_id	INT
+customer_id	INT
+order_date	TIMESTAMP
+amount	DECIMAL
+payment_method	VARCHAR
+
+Sample payment_method values: CreditCard, UPI, COD.
+
+Task
+
+For each customer, produce:
+A running total of amount spent by order_date,
+Reset the running total each calendar month,
+Along with the running total, compute the percentile rank of each order amount within that month for the customer.
+
+Your output should look like:
+
+| customer_id | order_date | amount | running_total_in_month | percentile_in_month |
