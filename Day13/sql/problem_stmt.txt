@@ -1,0 +1,31 @@
+“Customer Retention Cohort”
+
+Table: subscriptions
+
+Column Name	Data Type	Description
+customer_id	INT	Unique customer
+signup_date	DATE	Date customer signed up
+plan_start	DATE	Date of subscription start
+plan_end	DATE	Date of subscription end (NULL if active)
+Task:
+
+You’re asked to build a cohort retention table:
+
+For each signup month, find how many customers signed up (cohort size).
+For each subsequent month after signup, count how many of those customers were still active (plan_end is NULL or plan_end ≥ that month’s start).
+
+Output should look like this (example):
+
+signup_month	month_offset	active_customers
+2023-01	0	500 (signed up this month)
+2023-01	1	420
+2023-01	2	390
+2023-02	0	450
+2023-02	1	410
+
+Notes / Constraints:
+
+month_offset = 0 means signup month.
+month_offset = 1 means one month after signup, and so on.
+If a customer churned (plan_end < month start), they’re not counted in that offset.
+Show retention for at least 3 months after signup.
