@@ -1,0 +1,40 @@
+You have two massive data streams: IoT device telemetry and device metadata. Your task is to compute rolling health metrics and identify anomalous devices at scale.
+
+DataFrames
+
+telemetry_df
+
+Column Name	Type	Description
+device_id	string	Device identifier
+event_time	timestamp	Time of reading
+temperature	double	Temperature reading
+battery_level	double	Battery %
+error_code	string	Error code if any
+
+device_info_df
+
+Column Name	Type	Description
+device_id	string	Device identifier
+region	string	Region where device is installed
+model	string	Model name
+
+Task
+
+Join with Metadata
+Join telemetry_df with device_info_df to enrich readings with region and model.
+
+Rolling 15-minute Metrics per Device
+For each device_id, compute rolling 15-minute average temperature and rolling 15-minute min battery_level based on event_time.
+
+Error Rate
+For each device_id + region, compute the percentage of readings with error_code not null over the last 1 hour (rolling window).
+
+Identify Anomalous Devices
+A device is considered anomalous if:
+Rolling 15-minute average temperature > 80
+OR rolling min battery_level < 10
+OR error_rate > 5%
+
+Output
+Return a DataFrame with
+| device_id | region | model | rolling_avg_temp | rolling_min_battery | rolling_error_rate | is_anomalous |
