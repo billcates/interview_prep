@@ -1,0 +1,25 @@
+Question: Product Affinity Analysis
+
+You have an e-commerce table order_items:
+
+Column Name	Data Type	Description
+order_id	INT	Order identifier
+user_id	INT	User identifier
+product_id	INT	Product purchased
+quantity	INT	Quantity purchased
+order_date	DATE	Date of order
+
+Task:
+Find which products are most frequently bought together within the same order.
+For each order, generate all unique product pairs purchased by the same user in the same order.
+Count how many times each product pair occurs across all orders.
+
+Output:
+
+| product_id_1 | product_id_2 | together_count |
+
+Rules:
+
+product_id_1 < product_id_2 (no duplicates, no reverse pairs).
+Only consider orders with at least 2 distinct products.
+Sort the output by together_count DESC.
