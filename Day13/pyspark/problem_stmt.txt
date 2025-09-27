@@ -1,0 +1,42 @@
+You have massive clickstream + ads logs like before — but now your job is to attribute revenue at scale using time-windowed joins, deduplication, and multi-level aggregation.
+
+DataFrames
+
+clickstream_df
+
+Column Name	Type
+user_id	string
+session_id	string
+event_time	timestamp
+url	string
+referrer	string
+
+orders_df
+
+Column Name	Type
+order_id	string
+user_id	string
+order_time	timestamp
+revenue	double
+Task
+
+Attribution Window Join
+
+For each order, find the latest click (from clickstream_df) within 1 hour before the order_time for the same user_id.
+If multiple clicks exist in that window, take the most recent one.
+
+Deduplicate
+
+Make sure each order is linked to only one click.
+Campaign Extraction
+Extract campaign_id from referrer in clickstream (assume URLs like http://ads.com/campaign123).
+
+Compute Campaign Metrics
+
+Total revenue per campaign_id.
+Number of unique users who purchased.
+Average revenue per order.
+
+Output
+
+| campaign_id | total_revenue | unique_buyers | avg_revenue_per_order |
