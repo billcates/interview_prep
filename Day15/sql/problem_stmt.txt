@@ -1,0 +1,35 @@
+App Feature Usage Tracking
+
+You’re given two tables:
+
+1️⃣ app_events
+Column Name	Data Type	Description
+user_id	INT	User identifier
+event_time	TIMESTAMP	Time of the event
+feature	VARCHAR	Which feature was used (e.g. search, chat, upload)
+event_type	VARCHAR	Action type (open, click, exit)
+
+2️⃣ subscriptions
+Column Name	Data Type	Description
+user_id	INT	User identifier
+signup_date	DATE	When the user signed up
+plan_type	VARCHAR	Free / Paid
+🎯 Task
+
+For each user and feature, you need to:
+
+Time-Bucket the events into 15-minute windows based on event_time.
+(Think of this as floor(event_time to 15 min).)
+
+Count how many times the user used each feature in each 15-minute bucket.
+Find the first time bucket when a user used a given feature after signing up.
+Use subscriptions.signup_date to anchor the starting point.
+
+Compute retention:
+
+For each user & feature, find if they came back in the next 15-minute bucket to use the same feature again.
+Return 1 if yes, 0 otherwise.
+
+Output the following:
+
+| user_id | feature | bucket_start_time | usage_count | returned_next_bucket | plan_type |
