@@ -5,7 +5,7 @@ def func(sensor_readings_df,maintenance_logs_df):
     window=Window.partitionBy("device_id","event_time").orderBy(f.desc("ingestion_time"))
 
     sensor_readings_df= sensor_readings_df.withColumn("rn",f.row_number().over(window)).filter(f.col("rn")==1).drop("rn")
-    sensor_readings_df=sensor_readings_df.withColumn("sensor_device_id","device_id")
+    sensor_readings_df=sensor_readings_df.withColumnRenamed("device_id","sensor_device_id")
 
     maintenance_df=sensor_readings_df.join(maintenance_logs_df,(
         (sensor_readings_df.sensor_device_id==maintenance_logs_df.device_id)
