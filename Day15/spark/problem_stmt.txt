@@ -1,0 +1,51 @@
+You’re working with IoT sensor data at massive scale. You receive two streams of data daily:
+
+sensor_readings_df (raw IoT sensor stream)
+maintenance_logs_df (when devices go for maintenance)
+Your goal is to produce a clean, enriched daily feature set for downstream ML models.
+
+DataFrames
+sensor_readings_df
+Column	Type	Description
+device_id	string	Device identifier
+event_time	timestamp	Time of reading
+temperature	double	Temperature reading in °C
+vibration	double	Vibration reading
+pressure	double	Pressure reading
+
+maintenance_logs_df
+Column	Type	Description
+device_id	string	Device identifier
+maintenance_time	timestamp	Time of maintenance
+maintenance_type	string	e.g. “calibration”, “battery_replace”
+
+Tasks
+1️⃣ Deduplicate at Scale
+Sensor data may have duplicates due to retries. For each (device_id, event_time) keep only the latest row by arrival time (assume you have an ingest_time column too).
+
+2️⃣ Time-Based Join with Maintenance Logs
+For each sensor reading, find the latest maintenance event within the past 24 hours for that device.
+If none, mark maintenance_type as “none”.
+(This forces you to do a time-range join like yesterday — but now with enrichment from a second DataFrame.)
+
+3️⃣ Rolling Feature Engineering
+Compute for each device over a 1-hour sliding window ordered by event_time:
+Rolling average temperature
+Rolling max vibration
+Rolling standard deviation of pressure
+
+(All using PySpark Window with .rangeBetween.)
+
+4️⃣ Flag Anomalies
+Mark a reading as anomalous if:
+rolling_avg_temperature > 90 or
+rolling_max_vibration > 50 or
+no maintenance in past 24h but rolling_std_pressure > threshold
+Add a column is_anomalous = 1 or 0.
+
+5️⃣ Final Output
+
+Return a DataFrame with:
+| device_id | event_time | maintenance_type | rolling_avg_temperature | rolling_max_vibration | rolling_std_pressure | is_anomalous |
+
+Sorted by device_id, event_time.
