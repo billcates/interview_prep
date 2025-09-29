@@ -1,0 +1,32 @@
+Inventory Gaps & Backorders
+Tables
+
+inventory_movements
+
+column name	type	description
+product_id	int	product identifier
+movement_date	date	date of the movement
+movement_type	varchar	'in' for stock-in, 'out' for stock-out
+quantity	int	quantity moved
+
+products
+
+column name	type	description
+product_id	int	product id
+category	varchar	product category
+Task
+
+For each product_id, detect stockout events and compute how long the stock remained at zero (a “gap”) before it was replenished.
+Inventory starts at zero unless otherwise stated.
+
+Each row in inventory_movements is either:
+an “in” movement (stock coming in)
+or an “out” movement (stock going out)
+
+You need to produce:
+
+| product_id | stockout_start_date | stockout_end_date | days_out_of_stock |
+
+stockout_start_date: the first day stock level became ≤ 0
+stockout_end_date: the next day stock level became > 0
+days_out_of_stock: difference in days between end and start
