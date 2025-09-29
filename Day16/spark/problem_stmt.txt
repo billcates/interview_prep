@@ -1,0 +1,45 @@
+Handling Data Skew & Approximate Analytics
+
+You’re working on ad-impression logs at billions of rows per day. Each record records which ad campaign was shown to which user. Some campaigns (and some users) are extremely skewed — they dominate the dataset.
+
+DataFrames
+impressions_df
+Column	Type	Description
+user_id	string	User identifier
+campaign_id	string	Campaign identifier
+impression_time	timestamp	When the ad was shown
+cost	double	Cost of impression
+
+user_info_df
+Column	Type	Description
+user_id	string	User identifier
+country	string	User’s country
+segment	string	“loyal”, “new”, etc.
+
+Tasks
+1️⃣ Handle Skew in Joins
+
+impressions_df is huge, user_info_df is small.
+Efficiently join them (hint: broadcast or salting technique).
+Demonstrate how you would do this at scale.
+
+2️⃣ Approximate Distinct Count
+
+For each (country, campaign_id) pair compute approximate unique users using approx_count_distinct (HyperLogLog style).
+This is to handle billions of rows fast.
+
+3️⃣ Time-Based Aggregation
+
+Compute hourly total cost of impressions per campaign per country.
+(Use window or date truncation).
+
+4️⃣ Top-K per Group
+
+For each country, find top 3 campaigns by cost in the last 24 hours.
+(You’ll need window ranking over aggregated data).
+
+5️⃣ Output
+
+Return a DataFrame:
+
+| country | campaign_id | approx_unique_users | total_cost_last_24h | rank_in_country |
