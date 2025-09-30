@@ -1,0 +1,19 @@
+You are given a table of employee job history. Sometimes, due to system errors, job periods overlap for the same employee.
+
+Table: employee_jobs
+Column Name	Type	Description
+employee_id	INT	Employee identifier
+job_id	INT	Job identifier
+start_date	DATE	When the job started
+end_date	DATE	When the job ended (nullable for current jobs)
+Task
+
+For each employee, detect overlapping job periods — cases where two jobs for the same employee overlap in time.
+
+Output a table like:
+
+| employee_id | job_id_1 | start_date_1 | end_date_1 | job_id_2 | start_date_2 | end_date_2 |
+
+where the two jobs overlap.
+
+Ensure you don’t duplicate pairs (if you output (job1, job2), don’t output (job2, job1)).
