@@ -1,0 +1,22 @@
+You are given two huge DataFrames:
+
+transactions_df
+
+transaction_id
+user_id
+amount
+timestamp
+
+users_df
+
+user_id
+country
+
+Task
+
+Join transactions_df with users_df to get the country of each transaction.
+But assume most users come from just 2–3 countries (e.g., US, IN), creating data skew during shuffle.
+
+Compute the top 5 users by transaction amount per country in the last 7 days.
+
+Optimize your solution for big data scale (hint: think about salting / broadcast / repartition strategies).
