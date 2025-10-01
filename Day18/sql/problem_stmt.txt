@@ -1,0 +1,32 @@
+Event Logs with JSON Payloads
+
+You are given a table event_logs where product analytics data is stored.
+
+event_logs
+Column	Type	Description
+event_id	int	unique event identifier
+user_id	int	user identifier
+event_time	timestamp	time of the event
+event_type	string	e.g. 'click', 'purchase', 'view'
+metadata	string	JSON payload containing event details
+
+Sample metadata values:
+{"page": "home", "campaign": "summer2023", "button": "signup"}
+{"page": "product", "campaign": "summer2023", "price": 120}
+{"page": "checkout", "campaign": "summer2023", "payment": "credit_card"}
+
+❓ Task
+
+Parse the metadata JSON to extract:
+
+page
+campaign
+price (default = 0 if missing)
+
+For each campaign, compute:
+
+Total number of distinct users who clicked
+Total revenue from purchases (sum(price))
+Conversion rate = (# of users who purchased / # of users who clicked) * 100
+
+Return results sorted by conversion_rate descending.
