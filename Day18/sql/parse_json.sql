@@ -9,8 +9,9 @@ SELECT campaign,
     count(DISTINCT user_id) as distinct_users,
     sum(price) as total_price,
     round(
-        (sum(case when event_type='purchase' then 1 else 0 end))::decimal(5,2)/
-        (sum(case when event_type='click' then 1 else 0 end))*(100.0)
+        COUNT(DISTINCT CASE WHEN event_type='purchase' THEN user_id END)::decimal/
+        COUNT(DISTINCT CASE WHEN event_type='click' THEN user_id END)::decimal
+        *100
     ,2) as conversion_rate
 from cte
 group by campaign
