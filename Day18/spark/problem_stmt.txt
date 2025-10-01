@@ -1,0 +1,35 @@
+You’re building an incremental pipeline for slowly changing user profiles. 
+Each day you receive new/updated data. You need to maintain a gold table with the latest snapshot.
+
+Input DataFrames
+user_updates_df (daily incremental feed)
+Column	Type	Description
+user_id	string	User identifier
+name	string	User’s current name
+email	string	Current email
+updated_at	timestamp	Event time of this update
+
+user_snapshot_df (existing “gold” table)
+Column	Type	Description
+user_id	string	User identifier
+name	string	Last known name
+email	string	Last known email
+updated_at	timestamp	Last update time in snapshot
+Tasks
+
+Deduplicate incoming feed
+
+For each user_id, keep only the latest record from user_updates_df (by updated_at).
+
+Merge with snapshot
+If a user_id exists in snapshot, compare updated_at:
+If incoming update is newer → overwrite snapshot.
+If snapshot is newer → keep snapshot.
+If user_id doesn’t exist in snapshot → insert new record.
+
+Produce final up-to-date snapshot
+
+Return a DataFrame with the latest version of each user.
+
+Output
+| user_id | name | email | updated_at |
