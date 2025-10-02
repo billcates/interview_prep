@@ -1,0 +1,52 @@
+You are working with real-time ad impressions coming in as a stream. Your pipeline must handle late arriving events and compute correct aggregates.
+
+DataFrames
+
+impressions_df (streaming)
+
+Column	Type	Description
+impression_id	string	Unique impression event
+user_id	string	User who saw the ad
+campaign_id	string	Campaign identifier
+impression_time	timestamp	Time when impression occurred
+cost	double	Cost of this impression
+
+clicks_df (streaming)
+
+Column	Type	Description
+click_id	string	Unique click event
+impression_id	string	Corresponding impression_id
+click_time	timestamp	Time of the click
+Tasks
+
+1️⃣ Deduplication in Streaming
+
+Remove duplicates from both impressions and clicks based on their IDs (impression_id, click_id) — assume late events can arrive.
+Keep only the latest event within a 10-minute watermark.
+
+2️⃣ Stream-Stream Join with Watermark
+
+Join impressions with clicks on impression_id.
+Ensure you handle late events:
+impressions can be late by up to 15 minutes
+clicks can be late by up to 30 minutes.
+
+3️⃣ Attribution Window
+
+Count a click as valid only if it happens within 1 hour of the impression_time.
+
+4️⃣ Metrics Computation (per campaign, per 10-minute window):
+
+Total impressions
+Total clicks
+CTR (click-through rate = clicks / impressions)
+Total spend (sum of cost)
+Effective CPC (cost per click = spend / clicks)
+
+5️⃣ Final Output
+
+Output a DataFrame with:
+
+| campaign_id | window_start | window_end | impressions | clicks | ctr | total_spend | cpc |
+
+This should be watermarked, fault-tolerant, streaming-aggregated output.
