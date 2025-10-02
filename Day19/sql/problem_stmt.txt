@@ -1,0 +1,21 @@
+You’re given a table user_activity that tracks when users log in and log out. Sometimes users stay continuously active (back-to-back sessions), and we want to group such sessions into active streaks.
+
+Table: user_activity
+user_id	activity_date	event_type
+1	2023-01-01	login
+1	2023-01-02	login
+1	2023-01-04	login
+2	2023-01-01	login
+2	2023-01-03	login
+2	2023-01-04	login
+Task
+
+For each user, identify continuous active streaks of login days (no gap more than 1 day).
+Output the user_id, streak_start, streak_end, streak_length.
+
+Expected Output (from sample above)
+user_id	streak_start	streak_end	streak_length
+1	2023-01-01	2023-01-02	2
+1	2023-01-04	2023-01-04	1
+2	2023-01-01	2023-01-01	1
+2	2023-01-03	2023-01-04	2
