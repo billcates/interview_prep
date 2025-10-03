@@ -1,0 +1,14 @@
+You have a streaming dataset of user events with the schema:
+
+user_id (string)
+event_time (timestamp)
+event_type (string: "page_view", "add_to_cart", "purchase")
+
+Task (Simplified):
+Instead of detecting sessions with 30-min gaps, just:
+Assign fixed time windows (say, 30-minute tumbling windows).
+
+For each (user_id, window), compute:
+total number of events (event_count)
+session duration (max(event_time) - min(event_time))
+had_purchase (True/False if any purchase in the window)
