@@ -1,0 +1,43 @@
+Deduplicating Event Streams with Priority Rules
+
+You have a table user_events:
+
+user_events
+------------
+user_id       INT
+event_time    TIMESTAMP
+event_type    VARCHAR(20)   -- 'click', 'view', 'purchase'
+source        VARCHAR(20)   -- 'web', 'mobile', 'email'
+
+
+Each user_id can have multiple events of the same type within the same day.
+Due to system duplication, sometimes events are logged multiple times across different sources.
+
+Task:
+
+For each user_id and event_type per day, return only one canonical event, following these rules:
+If there are duplicates on the same day, pick in priority order of source:
+
+mobile > web > email
+
+If there are still ties (same user, event_type, day, source), take the earliest event_time.
+Output columns:
+
+user_id
+event_date
+event_type
+source
+event_time
+
+Example Input:
+user_id	event_time	event_type	source
+1	2025-01-01 08:00:00	click	email
+1	2025-01-01 08:01:00	click	web
+1	2025-01-01 08:05:00	click	mobile
+1	2025-01-01 08:10:00	click	email
+2	2025-01-02 09:00:00	purchase	web
+2	2025-01-02 09:00:00	purchase	mobile
+Expected Output:
+user_id	event_date	event_type	source	event_time
+1	2025-01-01	click	mobile	2025-01-01 08:05:00
+2	2025-01-02	purchase	mobile	2025-01-02 09:00:00
