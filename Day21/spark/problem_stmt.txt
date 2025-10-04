@@ -1,0 +1,24 @@
+Running User-Level Aggregates with State
+
+Scenario:
+You’re given a real-time events stream with schema:
+
+user_id (string)
+event_time (timestamp)
+event_type (string: "page_view", "add_to_cart", "purchase")
+
+The business wants a running summary per user that updates as new events come in:
+
+Requirements:
+
+Maintain a cumulative count of events per user (running total, not reset by windows).
+Track the last event_time seen for each user.
+Track whether the user has ever made a purchase (boolean flag).
+Handle late data by dropping events older than 1 hour compared to watermark.
+
+Expected Output Example:
+
+user_id | total_events | last_event_time     | has_purchased
+--------+--------------+---------------------+--------------
+U1      | 53           | 2025-10-03 09:31:45 | True
+U2      | 17           | 2025-10-03 09:32:20 | False
