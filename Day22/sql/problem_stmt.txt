@@ -1,0 +1,26 @@
+“Top-K Trending Product by Growth Rate”
+Scenario
+
+You work for an e-commerce platform.
+You have a table of daily product sales:
+
+product_sales
+--------------
+product_id      INT
+event_date      DATE
+revenue         DECIMAL(10,2)
+
+
+You need to find the top 3 products showing the highest revenue growth rate compared to their previous 7-day average.
+
+Task Details
+
+For each (product_id, event_date), calculate:
+current_7d_avg = average revenue in the last 7 days including that day
+prev_7d_avg = average revenue in the previous 7 days (before that 7-day window)
+
+Compute the growth rate as:
+
+growth_rate = (current_7d_avg - prev_7d_avg) / NULLIF(prev_7d_avg, 0)
+
+On the latest date in the dataset, find the top 3 products with the highest positive growth_rate.
