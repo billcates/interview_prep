@@ -43,7 +43,7 @@ def update_session(session: Session, event) -> Session:
 
 def update_session_fun(user_id,rows_iterator,state):
     events = sorted(list(rows_iterator), key=lambda e: e.event_time)
-    if state.exists:
+    if state.exists():
         session=state.get()
     else :
         session = None
@@ -88,13 +88,12 @@ def update_session_fun(user_id,rows_iterator,state):
 
 df = spark.readStream.format("json").schema(schema).load("s3_path")
 
-df=df.withWaterMark("event_time","1 hour")
+df=df.withWatermark("event_time","1 hour")
 
-res=df.groupByKey(lambda row:row.user_id).FlatMapGroupsWithState(
+res=df.groupByKey(lambda row:row.user_id).flatMapGroupsWithState(
     func=update_session_fun,
     output_mode="append",
-    stateTimeoutDuration="30 minutes",
-    timeoutConf=GroupStateTimeout.EventTimeTimeout
+    timeout=GroupStateTimeout.EventTimeTimeout
 )
 
 res_df=res.toDF(["user_id","session_id","start_time","end_time","event_count","has_purchase"])
