@@ -1,0 +1,40 @@
+Sessionization with State (Advanced Stateful Streaming)
+🎯 Goal:
+
+Detect user sessions in a real-time stream — a session is a sequence of events where the gap between consecutive events ≤ 30 minutes.
+When a gap > 30 min occurs, the current session closes, and a session summary should be emitted.
+
+📥 Input Stream (JSON from S3 or Kafka)
+
+Schema:
+
+user_id STRING
+event_time TIMESTAMP
+event_type STRING  ("page_view", "add_to_cart", "purchase")
+
+🧩 Requirements
+
+For each user:
+
+Group all their events (ordered by time).
+Track a current active session in state:
+session_id (you can use start time or a counter)
+start_time
+last_event_time
+event_count
+has_purchase
+
+If a new event’s timestamp > 30 minutes from the previous event:
+Emit the finished session (as a row)
+Start a new session.
+
+Use flatMapGroupsWithState because a user can emit multiple sessions over time.
+
+🧱 Output Columns
+Column	Description
+user_id	user id
+session_id	session identifier
+start_time	first event time
+end_time	last event time
+event_count	number of events in session
+has_purchase	whether any event was a “purchase”
