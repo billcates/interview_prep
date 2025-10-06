@@ -1,0 +1,25 @@
+Build a deduplication mechanism in PySpark Structured Streaming that ensures exactly-once event processing even when:
+Events arrive late or out of order
+Your source (e.g., Kafka/S3) may replay event
+You have a unique event_id but need to ensure downstream writes are not duplicated
+
+🧩 Scenario
+
+You receive a stream of click events from Kafka or S3:
+
+event_id STRING      -- unique identifier for the event
+user_id STRING
+event_time TIMESTAMP
+event_type STRING
+
+Due to retries or upstream issues, the same event_id might appear multiple times.
+You must process each event only once, even in streaming mode.
+
+⚙️ Requirements
+
+Read streaming data from JSON or Kafka.
+Use watermarking + state to track seen event_ids per user.
+Emit each unique event only once.
+Expire old state after 1 hour (to prevent memory growth).
+
+Write deduplicated stream to Parquet/S3 output.
