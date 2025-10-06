@@ -1,0 +1,39 @@
+Multi-Level Revenue Share (Category → Subcategory → Product)
+Scenario
+
+You work for a large e-commerce company.
+Your product catalog has hierarchical categories, and each product generates daily sales.
+
+You need to produce a multi-level aggregation report that shows:
+
+Total revenue per level
+
+Each level’s percent contribution to its parent level
+
+Schema
+product_hierarchy
+column	type	description
+product_id	INT	unique product
+product_name	VARCHAR	
+subcategory	VARCHAR	sub-level
+category	VARCHAR	top level
+
+sales
+column	type	description
+product_id	INT	FK to product_hierarchy
+order_date	DATE	
+revenue	DECIMAL(10,2)	
+
+🎯 Task
+
+For the entire dataset:
+Compute total revenue per category, subcategory, and product.
+For each level, show its revenue share relative to its parent:
+
+product_share = product revenue / subcategory revenue
+
+subcategory_share = subcategory revenue / category revenue
+
+Output columns:
+
+| category | subcategory | product_name | total_revenue | share_to_parent |
