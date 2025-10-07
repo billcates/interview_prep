@@ -1,0 +1,18 @@
+SELECT c.category_name,
+       COUNT(DISTINCT o.customer_id) AS total_customers,
+       SUM(o.quantity * o.price) AS total_revenue
+FROM orders o
+JOIN products p ON o.product_id = p.product_id
+JOIN categories c ON p.category_id = c.category_id
+WHERE o.order_id IN (SELECT order_id FROM orders WHERE quantity > 1)
+GROUP BY c.category_name
+ORDER BY total_revenue DESC;
+
+
+✅ Task
+Identify performance issues in the above query.
+
+Rewrite it for optimal performance, explaining each change.
+(Think: subquery elimination, filtering strategy, CTE usage, or index suggestion.)
+
+Bonus: How would you tune this query if the orders table had 1 billion rows?
