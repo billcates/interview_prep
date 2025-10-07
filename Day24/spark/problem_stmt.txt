@@ -1,0 +1,66 @@
+Session Extension / Merging Logic
+
+You have a stream of user events:
+
+Column	Type	Description
+user_id	string	User identifier
+event_time	timestamp	When the event occurred
+event_type	string	“page_view”, “add_to_cart”, “purchase”
+
+You want to build sessions per user where:
+
+A session starts when a new user event arrives.
+A session continues if the next event occurs within 30 minutes.
+If a new event comes after 30 minutes, start a new session.
+If a user returns within 10 minutes after a session ended, merge the two sessions (i.e., treat it as one long session).
+
+So this introduces a new twist — “session extension” logic.
+
+🧠 Goal
+Using flatMapGroupsWithState, build logic that:
+Tracks per-user active session.
+Ends sessions after 30 min of inactivity.
+If a new event comes within 10 minutes after session end, merge with previous.
+
+Outputs finalized sessions with:
+
+user_id
+session_id
+session_start
+session_end
+event_count
+has_purchase
+
+💡 Hint / Key Learning
+
+This problem introduces dynamic state merging — you’ll need to:
+Keep the last ended session temporarily in state (for merging).
+When a new event arrives, check the gap:
+If ≤ 30 → continue same session.
+If > 30 but ≤ 40 → merge with previous session.
+Else → start a new one.
+
+Manage timeouts properly (EventTimeTimeout).
+
+🧱 Schema Setup
+schema = StructType([
+    StructField("user_id", StringType(), True),
+    StructField("event_time", TimestampType(), True),
+    StructField("event_type", StringType(), True),
+])
+
+🧮 Expected Output Example
+
+Input:
+
+user_id	event_time	event_type
+u1	2025-10-06 10:00:00	page_view
+u1	2025-10-06 10:20:00	add_to_cart
+u1	2025-10-06 10:55:00	purchase
+u1	2025-10-06 12:00:00	page_view
+
+Output:
+
+user_id	session_id	start_time	end_time	event_count	has_purchase
+u1	s1	10:00	10:55	3	✅
+u1	s2	12:00	12:00	1	❌
