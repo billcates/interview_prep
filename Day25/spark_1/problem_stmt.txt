@@ -1,0 +1,18 @@
+You’re ingesting a continuous stream of user interaction events from S3 in JSON format with the schema:
+
+Column	Type	Description
+user_id	string	Unique user identifier
+event_time	timestamp	Event timestamp
+event_type	string	“page_view”, “add_to_cart”, “purchase”
+event_value	double	Numerical value for the event (e.g., revenue)
+
+Task:
+Create a Delta Lake table that stores daily aggregates of these streaming events.
+
+Requirements:
+
+Read the streaming data from S3 (s3://company-data/user_events/).
+Aggregate events per day and event type (event_date, event_type).
+Maintain an updatable Delta table such that if late events arrive (within 1 day delay), the corresponding daily aggregates are updated correctly.
+Write the results to s3://company-analytics/daily_event_agg/ in Delta format.
+You must ensure exactly-once processing semantics and schema enforcement.
