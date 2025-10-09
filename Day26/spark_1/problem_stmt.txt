@@ -1,0 +1,30 @@
+You’re designing a real-time order analytics pipeline for an e-commerce company.
+Orders arrive as a JSON stream in S3:
+
+Column	Type	Description
+order_id	string	Unique order identifier
+user_id	string	Customer who placed the order
+order_time	timestamp	When the order was placed
+order_amount	double	Total order value
+status	string	“PLACED”, “CANCELLED”, or “DELIVERED”
+Task
+
+You need to build a Delta Lake upsert pipeline with the following conditions:
+Maintain a live Delta table called daily_order_summary with:
+
+order_date
+total_orders (count of unique order_id)
+cancelled_orders (count where status = 'CANCELLED')
+delivered_orders (count where status = 'DELIVERED')
+total_revenue (sum of order_amount where status = 'DELIVERED')
+
+The incoming stream may contain late-arriving events up to 3 days.
+Handle this properly using event-time watermarks.
+
+Occasionally, an update event arrives for an already existing order_id
+(for example, changing status from “PLACED” → “DELIVERED”).
+
+You must deduplicate and ensure that your aggregates reflect the latest order status and amount.
+Write the results to a Delta table:
+Delta path: s3://company-analytics/daily_order_summary/
+Checkpoint path: s3://company-analytics/checkpoints/daily_order_summary/
