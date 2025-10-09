@@ -1,0 +1,26 @@
+You’re receiving a continuous stream of user transactions from an S3 source (s3://company-data/transactions/) with the schema:
+
+Column	Type	Description
+txn_id	string	Unique transaction identifier
+user_id	string	User performing the transaction
+txn_time	timestamp	Time of transaction
+amount	double	Transaction amount
+currency	string	Transaction currency (e.g., “USD”, “INR”)
+Task
+
+You need to build a Delta Lake pipeline that maintains an updatable daily summary table of transactions, with the following requirements:
+
+Aggregate transactions per day and currency, computing:
+total_transactions → number of transactions
+unique_users → count of distinct users
+total_amount → sum of transaction amounts
+
+Handle schema evolution — occasionally, a new column payment_method (e.g., “UPI”, “CARD”) might appear in the incoming JSON files.
+
+Your pipeline must automatically handle new columns without failing.
+The Delta table should always contain the latest daily aggregates, even when late transactions arrive (within a 2-day window).
+
+Store the results in:
+
+Delta output path: s3://company-analytics/daily_txn_summary/
+Checkpoint path: s3://company-analytics/checkpoints/daily_txn_summary/

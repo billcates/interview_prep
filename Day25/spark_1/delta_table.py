@@ -30,7 +30,6 @@ def process_func(batch_df,batch_id):
         }).whenNotMatchedInsertAll().execute()
     else:
         batch_df.write.format("delta").mode("append").saveAsTable("bill_testing_delta")
-    
 
 
 df=spark.readStream.format("json").schema(schema).load("s3://company-data/user_events/")
