@@ -1,0 +1,30 @@
+Dynamic Partition Overwrite in Delta + Handling Partitioned Writes in Streaming
+
+📌 Problem Statement
+
+You are receiving a stream of transaction events from S3 in JSON format with the following schema:
+
+Column	Type	Description
+order_id	string	Unique order identifier
+user_id	string	User placing the order
+order_amount	double	Transaction amount
+order_status	string	"CREATED", "PAID", "CANCELLED"
+event_time	timestamp	When the transaction event was generated
+date	string (yyyy-MM-dd)	Derived partition column
+
+🎯 Task
+
+Read streaming data from S3 (JSON format).
+Derive the date column using event_time (date_format(event_time, 'yyyy-MM-dd')).
+Write to a Delta table partitioned by date, but enable dynamic partition overwrite so that:
+
+If a new batch contains records for 2025-10-10, only that partition is overwritten.
+Other partitions remain untouched (unlike overwrite mode).
+
+Use trigger once or processingTime trigger (your choice).
+✅ Write code using option("partitionOverwriteMode", "dynamic").
+
+🚀 Expected Output
+A Delta table in S3, partitioned by date.
+Each run only overwrites the partitions present in the incoming microbatch.
+No full table overwrite.
