@@ -1,0 +1,27 @@
+Incremental Deduplication with Delta + Structured Streaming + Stateful Aggregation
+✅ Use Case
+
+You have real-time clickstream logs coming in continuously with possible duplicates and partial updates.
+
+Incoming Stream Schema
+| event_id | user_id | url | event_time | device | browser | ts_ingested |
+
+event_id should be unique, but due to retries/replays — duplicates exist.
+Sometimes duplicate event_id has different device or browser → treat it as an update.
+
+If same event_id arrives again after 24 hours → treat it as a new event (reset logic)
+
+You must maintain a Delta table clicks_cleaned that always contains only one active record per event_id, but:
+If update happens within 24 hours, overwrite the record
+If update happens after 24 hours, insert as a fresh event with a new UUID
+Must use Delta Table + foreachBatch + stateful dedup logic (NOT merge!)
+Must track seen event_ids in memory using mapGroupsWithState
+
+🎯 Your Task
+
+💡 Write a streaming PySpark job that:
+Reads clickstream data from s3://raw/clicks/
+Uses mapGroupsWithState to track seen event_ids and timestamp of last seen
+If duplicate arrives within 24 hrs, treat as update → overwrite in Delta
+If same event_id comes after 24 hrs → insert as new row with a synthetic UUID
+Writes clean deduplicated clickstream table to s3://delta/clicks_cleaned/ as Delta
