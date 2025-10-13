@@ -1,0 +1,33 @@
+Delta Change Data Feed (CDF) — enable it, generate changes (insert/update/delete), and consume the change feed in a small batch job to produce a “changes” (silver) table that records the operation type.
+
+You will work entirely with Delta tables (no external streams). The goal is to learn the end-to-end CDF flow in a compact exercise.
+
+Given
+Working Spark session with Delta available.
+Use these paths (adjust to your env):
+Bronze base path: s3://your-bucket/delta/bronze_txns/
+Silver changes path: s3://your-bucket/delta/silver_txn_changes/
+Schema for transaction rows
+
+txn_id STRING, user_id STRING, amount DOUBLE, status STRING, event_time TIMESTAMP
+
+Task (one coding exercise):
+
+Create a Delta Bronze table at the Bronze path and insert an initial batch of rows (at least 4 rows).
+Enable Change Data Feed (CDF) for the Bronze table (table property)
+Perform a sequence of changes (in separate batch operations, not streaming):
+Update one row (change amount and status)
+Insert two new rows
+Delete one existing row
+(Do each change in a separate DataFrame write/commit so Delta versions advance.)
+Read the CDF from the Bronze table between appropriate versions or using a time range so you capture all the changes you just made.
+
+Produce a Silver Delta table at the Silver path that contains these columns:
+
+txn_id, user_id, amount, status, event_time, _change_type, _commit_version, _commit_timestamp
+where _change_type is the CDF operation (e.g., insert, update_preimage, update_postimage, delete).
+
+Write the Silver table (overwrite or append) so it persistently stores the change rows you read from CDF.
+Provide code that prints:
+Bronze table versions (or a small show of DESCRIBE HISTORY),
+The Silver table contents (show).
