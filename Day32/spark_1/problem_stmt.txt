@@ -1,0 +1,33 @@
+Flatten & Transform Nested Arrays
+
+You receive streaming JSON data representing orders. Each order has a nested array of items:
+
+{
+  "order_id": "123",
+  "user_id": "U1",
+  "items": [
+      {"product_id":"P1","qty":2,"price":100},
+      {"product_id":"P2","qty":1,"price":50}
+  ],
+  "order_time": "2025-10-15T12:30:00"
+}
+
+
+Goal:
+
+Flatten the items array so that each product in an order becomes a separate row.
+Add a computed column total_price = qty * price.
+Aggregate the data to compute total quantity and total revenue per product per day.
+Write the aggregated result to a Delta table.
+
+Requirements / Steps
+
+Read the JSON stream from S3 with a proper schema.
+Use explode_outer to flatten the items array.
+Use transform or withColumn to compute total_price.
+Extract order_date from order_time.
+Group by order_date and product_id to calculate:
+total_qty = sum(qty)
+total_revenue = sum(total_price)
+
+Write the aggregated result into a Delta table (daily partitioned).
