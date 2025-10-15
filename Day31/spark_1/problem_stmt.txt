@@ -1,1 +1,32 @@
-#day31
+You have a Delta table (transactions_delta) where inserts, updates, and deletes have occurred over time.
+
+👉 Your task is to build a PySpark script that:
+
+Reads two specific versions of the Delta table (say version 3 and version 5) using versionAsOf.
+Compares both versions row-by-row using txn_id as the key.
+Classifies changes into:
+
+"ADDED" → Present in version 5 but not in version 3
+"REMOVED" → Present in version 3 but not in version 5
+"MODIFIED" → Present in both, but any column value differs
+
+Generates a Delta table transactions_delta_diff_audit with following schema:
+
+Column	Description
+txn_id	Primary key
+change_type	ADDED / REMOVED / MODIFIED
+old_values	Struct of row from version 3 (Null for added rows)
+new_values	Struct of row from version 5 (Null for removed rows)
+base_version	Compared from version (3)
+target_version	Compared to version (5)
+diff_timestamp	Current timestamp
+
+Write the diff result as a Delta table (append mode) for audit & debugging.
+
+⚙️ Constraints
+
+✅ Use .option("versionAsOf", <num>) (not timestamp).
+✅ You can assume version numbers are passed as variables (BASE_VERSION, TARGET_VERSION)
+✅ txn_id is unique and stable
+✅ Use full outer join to detect adds/removals/modifications
+✅ Detect modifications by checking old_row != new_row using hash or string comparison
