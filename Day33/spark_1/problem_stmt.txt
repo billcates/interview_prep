@@ -1,1 +1,30 @@
-#day33
+Advanced CDC with Schema Evolution and Conditional Merge Logic
+🎯 Scenario
+
+You are receiving CDC events from Kafka where upstream systems sometimes add new fields dynamically. 
+The events are JSON and may contain new columns that do not exist in your Delta table yet.
+
+Example incoming CDC stream (JSON):
+
+{ "id": 101, "name": "Alice", "age": 30, "op": "update", "ts": "2025-02-01T10:00:00Z" }
+{ "id": 101, "name": "Alice", "age": 31, "country": "US", "op": "update", "ts": "2025-02-01T10:05:00Z" }  <-- NEW COLUMN country
+{ "id": 102, "name": "Bob", "age": 25, "salary": 5000, "op": "insert", "ts": "2025-02-01T10:10:00Z" }    <-- NEW COLUMN salary
+
+
+Your Delta table currently only has: id, name, age
+
+✅ Your Task
+
+Ingest the CDC JSON stream (static for this exercise).
+Detect columns in the incoming DataFrame that are NOT present in the target Delta table.
+Automatically alter the Delta table to add missing columns using ALTER TABLE or Delta API.
+
+Perform a MERGE (UPSERT) with additional logic:
+
+If a column exists in both source and target → update normally.
+If a new column is introduced → fill existing rows with "UNKNOWN" or -1 using transform over struct fields.
+
+Track schema updates in a Delta Audit Table like:
+
+| column_name | action          | ts                      |
+| salary      | added_to_delta  | 2025-02-01T10:10:10.000Z |
