@@ -1,0 +1,35 @@
+"You accidentally ran a wrong MERGE on a Delta table (transactions_gold) that corrupted data.
+Implement a Disaster Recovery strategy using:
+
+✅ Time Travel Snapshot Compare
+✅ Zero-copy CLONE for Safe Restoration
+✅ RESTORE TO VERSION ... and Replay Missed Deltas Pattern
+✅ Log the restore event into an audit_log Delta table automatically"
+
+🎮 Scenario
+
+You have a Delta table transactions_gold with historical versions.
+A bad deploy (wrong merge) corrupted data at version 12.
+The last good version was version 10.
+
+You must perform:
+
+✅ Step 1 – Create a zero-copy clone backup into transactions_backup_clone
+✅ Step 2 – Compare version 10 vs version 12 and generate a diff report
+✅ Step 3 – Restore transactions_gold back to version 10
+✅ Step 4 – Replay only the valid new inserts that came after version 10 (but avoid replaying bad MERGE data)
+✅ Step 5 – Log recovery details into delta_restore_audit_log with fields:
+
+restore_time, table_name, from_version, to_version, replay_applied, executed_by
+
+🎯 Objective
+
+Write a complete PySpark + Delta code flow that:
+
+Task	Expected Skill / Delta Operation
+Create zero-copy clone	CREATE OR REPLACE TABLE ... CLONE ... SHALLOW
+Version diff	Time Travel Read + Spark join compare
+Rollback table	RESTORE TABLE ... TO VERSION AS OF X
+Selective replay	Read CDF (readChangeFeed = true) and FILTER only INSERT events beyond version 10
+Logging	Append a row to delta_restore_audit_log
+Reliability	Wrap in try-except and include idempotent recovery pattern
