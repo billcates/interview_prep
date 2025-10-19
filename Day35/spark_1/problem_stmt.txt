@@ -1,0 +1,21 @@
+Concept: Streaming INSERT + UPDATE Detector + Delta ZORDER Optimization
+
+🧩 Scenario
+
+A stream of product pricing updates lands in S3 as JSON.
+
+Schema:
+
+| product_id | price | updated_at (timestamp) |
+
+Sometimes the price is same as last value → these must be skipped (idempotent load).
+Only modified values should be written to Delta.
+Maintain a Delta table with version history + ZORDER(product_id) every 10th microbatch for optimized lookup.
+
+🎯 Tasks
+
+Ingest streaming JSON from S3
+Use a stateful logic or join with latest Delta snapshot to detect ONLY changed price records
+Write only changed rows into a Delta table with merge and WHEN MATCHED AND price != updated.price THEN UPDATE
+Every 10th trigger, apply OPTIMIZE ... ZORDER BY product_id automatically inside foreachBatch
+Track Delta table growth and show versioning with deltaTable.history()
