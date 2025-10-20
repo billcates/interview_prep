@@ -1,0 +1,23 @@
+"How do you check if your Delta table is suffering from small files issue? And how would you detect it programmatically?"
+
+🎯 Interpretation:
+
+✅ Ideal avg_file_size_mb → 256MB - 1024MB
+🚨 If < 64MB → Too many small files → Triggers shuffle & slow merge
+🚨 If > 2GB → Too large files → Slow read & unnecessary IO
+🎯 Exercise for You (Hands-On in Databricks)
+
+Task:
+Write a reusable function check_table_health(table_path) that reports:
+Total file count
+Average file size
+Whether table needs OPTIMIZE
+If table is partitioned properly or under-partitioned
+
+🔥 Expected Output Example:
+
+📊 Delta Table Health Check (/mnt/data/sales_gold)
+   • Files: 4,328
+   • Avg File Size: 12 MB ❌ (Too Small)
+   • Partitioned By: date
+   • Recommendation: Run OPTIMIZE ZORDER BY (customer_id)
