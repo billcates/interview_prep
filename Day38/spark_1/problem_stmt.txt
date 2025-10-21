@@ -1,0 +1,35 @@
+Create a DLT pipeline that:
+
+Reads incremental data from a raw folder using Auto Loader
+Writes to a Bronze Delta table
+Is completely defined and runnable through code (Python + CLI)
+Logs the ingestion status and row counts
+
+🧩 Scenario
+
+You receive raw daily sales files from an upstream system as CSVs:
+
+/mnt/raw/sales/
+  ├── sales_2025_10_18.csv
+  ├── sales_2025_10_19.csv
+  ├── sales_2025_10_20.csv
+
+
+Each file has columns:
+
+order_id, product_id, category, price, quantity, sale_date
+
+
+You need to:
+Ingest all these files into a Bronze Delta table (sales_bronze)
+Use Auto Loader (cloudFiles) for incremental processing
+Register this Bronze table in the DLT pipeline
+Log the number of records loaded in each batch
+
+🧱 Expected Output
+
+A Delta Live Table named sales_bronze such that:
+Schema is automatically inferred
+Supports incremental ingestion
+For each batch, cloudFiles metadata table updates show newly discovered files
+Printing display(spark.read.table("LIVE.sales_bronze")) shows all merged sales
