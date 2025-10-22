@@ -1,0 +1,45 @@
+Build a Silver Table with Transformation and Data Quality Expectations
+🎯 Goal
+
+Using the Bronze table (sales_bronze), create a Silver DLT table that:
+Cleans and standardizes data
+Applies data quality constraints using DLT expectations
+Stores only valid, enriched records
+
+🧩 Scenario
+
+Your Bronze layer has noisy data:
+Some rows have missing product_id or negative price values
+Dates might be malformed or missing
+
+You need to:
+
+Transform Bronze data into a clean Silver table (sales_silver)
+Enforce these data quality rules:
+price > 0
+quantity >= 1
+product_id IS NOT NULL
+
+Drop invalid rows from the output table.
+Add a derived column: total_amount = price * quantity
+
+🧱 Expected Output
+
+A Silver Delta Live Table (sales_silver) such that:
+
+All records violate no constraints.
+Contains columns:
+order_id, product_id, category, price, quantity, sale_date, total_amount, load_time
+
+Invalid records are excluded from this table.
+Data quality metrics are visible in pipeline logs.
+
+🧑‍💻 Task
+
+Create the DLT Python code for sales_silver using the Bronze table from Day 1 as input.
+You’ll write only code — no UI configuration.
+When run, the pipeline should:
+
+Read from LIVE.sales_bronze
+Apply transformations and validations
+Write to LIVE.sales_silver
