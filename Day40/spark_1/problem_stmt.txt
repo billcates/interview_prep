@@ -1,1 +1,34 @@
-#dlt day3
+Create a Gold Layer with Incremental Aggregation and Upserts
+🎯 Goal
+
+Build a Gold-level LakeFlow pipeline that:
+Aggregates cleaned sales data from your Silver table (sales_silver)
+Maintains incremental metrics such as total sales and quantity per category per day
+Handles late-arriving updates (upserts) correctly
+
+🧩 Scenario
+
+Your Silver table (sales_silver) contains these columns.
+order_id, product_id, category, price, quantity, sale_date, total_amount, load_time
+
+The business team wants a daily summary dashboard that shows:
+category
+sale_date
+total_sales_amount
+total_quantity
+last_updated_time
+
+However, sometimes records arrive late (previous-day sales uploaded the next day).
+You need to ensure those late records are merged (not double-counted).
+
+🧱 Requirements
+Create a Gold table sales_gold using @dp.materialized_view().
+It should read from the Silver table incrementally.
+Aggregate by category and sale_date:
+total_sales_amount = SUM(total_amount)
+total_quantity = SUM(quantity)
+
+Maintain an upsert-like behavior:
+If a late record for a category + sale_date combination arrives, the aggregation should refresh automatically.
+Add a column last_updated_time that records the pipeline’s run time.
+Deploy the table as part of the same pipeline (no UI).
