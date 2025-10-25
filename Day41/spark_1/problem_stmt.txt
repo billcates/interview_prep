@@ -1,1 +1,2 @@
 #dlt day4
+#create_auto_cdc_flows

@@ -13,3 +13,6 @@ def load_gold_table():
         sum(col("quantity")).alias("total_quantity"))
         .withColumn("last_updated_time",current_timestamp()))
     return df
+
+# dlt can't handle updates to the delta table, it can append only
+#though we have create_auto_cd.c_flow it can be used only for tracking row level changes, not streaming aggregates
