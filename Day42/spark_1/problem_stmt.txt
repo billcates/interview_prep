@@ -1,0 +1,55 @@
+Streaming Join Between Silver Sales and Static Product Dimension
+🎯 Goal
+
+Create an enriched Silver+ table (sales_enriched_silver) that joins your streaming sales_silver data with a static dimension table (dim_product) containing product metadata.
+The join must be incremental and optimized for late data.
+
+🧩 Scenario
+
+You have:
+
+Streaming table (from previous day)
+
+sales_silver
+
+order_id, product_id, category, price, quantity, sale_date, total_amount, load_time
+
+Static lookup table
+
+dim_product (stored in Delta, refreshed weekly)
+product_id, product_name, brand, cost_price
+
+You need to:
+
+Create a new DLT streaming table sales_enriched_silver
+Incrementally join sales_silver (stream) with dim_product (static)
+
+Compute derived columns:
+
+profit = total_amount - (cost_price * quantity)
+margin_pct = (profit / total_amount) * 100
+
+Apply a data quality constraint:
+margin_pct BETWEEN 0 AND 90
+Invalid rows should be dropped, not failed.
+Add a column enriched_time = current_timestamp().
+
+🧱 Expected Output
+
+LIVE.sales_enriched_silver (or sales_enriched_silver in new dp API):
+
+order_id, product_id, product_name, brand, category,
+price, quantity, total_amount, cost_price, profit, margin_pct, sale_date, enriched_time
+
+🧠 Learning Focus
+Concept	Description
+Stream-static joins	Joining an incremental DLT stream with a static Delta dataset
+State management	Ensuring the streaming join doesn’t blow up memory
+DLT expectations	Enforcing and dropping invalid rows declaratively
+Pipeline layering	Building “Silver+” (enriched) intermediate tables
+
+🧰 Requirements
+
+All code must be in Python (from pyspark import pipelines as dp).
+Don’t use the UI; define everything in code.
+The join must tolerate late-arriving data (withWatermark on sale_date).
