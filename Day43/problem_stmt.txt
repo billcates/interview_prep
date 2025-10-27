@@ -1,0 +1,48 @@
+Implement Incremental CDC (Change Data Capture) in DLT
+
+Build a Delta Live Table (or dp.table if you prefer Lakeflow-style) that consumes incremental change data from an upstream “change feed” 
+and automatically merges updates and deletes into a target Delta table.
+
+🧩 Scenario
+
+You receive an upstream change feed of customer data from a CRM system.
+It is written to /mnt/raw/customer_changes/ with the following schema:
+
+customer_id    STRING
+name           STRING
+email          STRING
+city           STRING
+operation      STRING    -- values: "INSERT", "UPDATE", "DELETE"
+event_time     TIMESTAMP
+
+
+Your goal is to build two layers:
+
+1️⃣ Bronze table — customers_bronze
+
+Ingests raw data incrementally using Auto Loader
+Adds load_time and source_file metadata columns
+
+2️⃣ Silver table — customers_silver
+
+Applies CDC merge logic to maintain an up-to-date customer table:
+If operation == 'DELETE' → remove that customer_id
+If operation == 'UPDATE' or 'INSERT' → upsert the row
+This must be done incrementally, using DLT’s built-in CDC merge functionality.
+
+⚙️ Hint (conceptual, not code):
+DLT provides a helper like 
+dlt.apply_changes(target="customers_silver", 
+                    source="customers_bronze", 
+                    keys=["customer_id"], 
+                    sequence_by="event_time",
+                     apply_as_deletes="operation='DELETE'", 
+                     apply_as_truncates=None,
+                      except_column_list=["operation"])
+
+🧰 Requirements
+
+Must use Python-based DLT / dp decorator, not SQL or UI.
+Use Auto Loader for raw ingestion.
+Use apply_changes for the Silver layer.
+No manual MERGE INTO — use the declarative CDC API.
