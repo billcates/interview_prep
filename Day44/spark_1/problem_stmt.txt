@@ -1,0 +1,44 @@
+Handling Schema Evolution & Rescue Data in Databricks Lakeflow / DLT
+🎯 Goal
+
+Learn how to make your pipelines self-healing when new columns appear or datatypes change — without manual schema updates.
+You’ll build a DLT pipeline that:
+Ingests streaming data where new columns appear over time.
+Uses Auto Loader’s schema evolution mode.
+Captures unknown or mismatched columns into a special rescued_data column for debugging.
+
+🧱 Scenario
+
+Your marketing team sends CSV files daily to /mnt/raw/marketing_campaigns/.
+Initially, the schema is:
+
+campaign_id STRING,
+channel STRING,
+impressions LONG,
+clicks LONG,
+spend DOUBLE,
+event_time TIMESTAMP
+
+
+After a few days, they add two new columns:
+
+country STRING,
+device STRING
+
+Your pipeline should:
+Ingest all data (old + new files).
+Auto-detect the new columns and add them to the table automatically.
+Capture any unexpected / malformed fields in a rescued_data column.
+Create a Silver table that computes CTR (clicks/impressions) and filters out rows where CTR > 1 (invalid data).
+
+🧰 Technical Requirements
+
+Use dlt.table() decorators (code-only, no UI).
+Use format("cloudFiles") with:
+cloudFiles.format = "csv"
+cloudFiles.inferColumnTypes = "true"
+cloudFiles.schemaEvolutionMode = "addNewColumns"
+cloudFiles.schemaLocation = "dbfs:/mnt/schema/marketing_campaigns/"
+rescuedDataColumn = "_rescued_data"
+
+Store invalid or malformed rows separately using an expect_or_drop rule.
