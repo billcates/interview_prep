@@ -1,0 +1,24 @@
+You’re building a DLT pipeline for a retail sales analytics system.
+
+You have:
+
+sales_bronze → streaming ingestion from /mnt/raw/sales/
+sales_silver → cleansed and enriched transactional data
+
+You now need aggregated KPIs (Gold layer):
+
+Daily total sales per product
+Refresh incrementally as new data arrives
+Expose lightweight materialized views for dashboards
+
+💻 Your Task
+
+Write a DLT pipeline that:
+Loads raw data from /mnt/raw/sales/ using Auto Loader (Bronze)
+Cleans and standardizes data (Silver)
+Creates two downstream layers:
+
+One using @dlt.view (for temporary logic / dashboard)
+One using @dlt.table (materialized, persisted Delta table)
+
+Demonstrates the difference in compute cost and refresh between the two
