@@ -1,0 +1,38 @@
+Detecting Product Interest Windows”
+🎯 Scenario:
+
+You are given an event log from an e-commerce site.
+Each row represents a user event like viewing or adding a product to the cart.
+
+Column	Type	Description
+user_id	string	Unique user identifier
+event_time	timestamp	Time when the event occurred
+event_type	string	One of "view", "cart", "purchase"
+product_id	string	Product the event is associated with
+
+You are asked to identify the "interest window" for each user-product pair —
+the time between the first "view" and the first "purchase" of that product (if purchase exists).
+
+If the user never purchased that product, ignore that product for that user.
+
+✅ Requirements:
+
+Compute, for each (user_id, product_id) pair:
+
+first_view_time
+purchase_time
+interest_duration_minutes (difference between the two in minutes)
+Only include rows where a "purchase" event exists for that product by that user.
+Output should be sorted by interest_duration_minutes ascending.
+
+💡 Example Input:
+user_id	event_time	event_type	product_id
+u1	2025-10-01 10:00:00	view	p1
+u1	2025-10-01 10:05:00	view	p1
+u1	2025-10-01 10:15:00	purchase	p1
+u1	2025-10-01 11:00:00	view	p2
+u2	2025-10-01 09:00:00	view	p3
+
+💡 Example Output:
+user_id	product_id	first_view_time	purchase_time	interest_duration_minutes
+u1	p1	2025-10-01 10:00:00	2025-10-01 10:15:00	15
