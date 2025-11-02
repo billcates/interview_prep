@@ -1,0 +1,20 @@
+You’re given a table orders with the following schema:
+
+Column Name	Type	Description
+order_id	int	Unique ID for each order
+user_id	int	ID of the user who placed the order
+order_date	date	Date of the order
+order_amount	int	Amount spent on the order
+🎯 Question
+
+Find the top 3 users who had the largest increase in their average monthly spending compared to the previous month.
+Consider only users who have at least 2 months of order history.
+If multiple users have the same increase, rank them by total lifetime spend.
+
+Output columns: user_id, month, prev_month, avg_monthly_spend, prev_avg_spend, increase.
+
+⚙️ Expected Output Example
+user_id	month	prev_month	avg_monthly_spend	prev_avg_spend	increase
+102	2025-10	2025-09	1300	800	500
+89	2025-10	2025-09	2200	1800	400
+56	2025-10	2025-09	950	600	350
