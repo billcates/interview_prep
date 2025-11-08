@@ -8,7 +8,6 @@ class Solution:
                 tmp = 1
                 i = each+1
                 while i in st:
-                    print(each, i)
                     tmp+=1
                     i+=1
                 
