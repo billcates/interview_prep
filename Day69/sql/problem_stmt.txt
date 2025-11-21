@@ -1,0 +1,31 @@
+Monthly Revenue Gap Analysis
+
+CREATE TABLE orders (
+    order_id     SERIAL PRIMARY KEY,
+    customer_id  INT,
+    order_date   DATE,
+    amount       NUMERIC(10,2)
+);
+
+
+INSERT INTO orders (customer_id, order_date, amount) VALUES
+(1, '2025-01-05', 1200.00),
+(2, '2025-01-12',  800.00),
+(1, '2025-02-03', 1500.00),
+(3, '2025-02-20',  600.00),
+(2, '2025-03-10', 2000.00),
+(1, '2025-03-18',  900.00),
+(3, '2025-04-01',  750.00),
+(2, '2025-04-15', 1300.00);
+
+
+For each month, calculate:
+
+The total revenue of that month
+
+The previous month’s revenue
+
+The difference between the two (month-over-month revenue growth)
+
+Output columns:
+month_start | monthly_revenue | prev_month_revenue | revenue_diff
