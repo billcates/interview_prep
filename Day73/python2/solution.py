@@ -18,3 +18,19 @@ class Solution:
         _res.next =list1 or list2
         
         return head.next
+    
+###################
+#recursion
+
+def mergeTwoLists_recursive(list1, list2):
+    if not list1:
+        return list2
+    if not list2:
+        return list1
+    
+    if list1.val < list2.val:
+        list1.next = mergeTwoLists_recursive(list1.next, list2)
+        return list1
+    else:
+        list2.next = mergeTwoLists_recursive(list2.next, list1)
+        return list2
