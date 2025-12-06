@@ -23,4 +23,20 @@ class Solution:
                 if node.left:
                     q.append(node.left)
         return res
-        
+
+# dfs approach 
+
+class Solution:
+    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+        res=[]
+        def helper(root, level):
+            if root is None:
+                return
+            if level==len(res):
+                res.append(root.val)
+            helper(root.right,level+1)
+            helper(root.left,level+1)
+        helper(root,0)
+
+        return res
+         
