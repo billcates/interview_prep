@@ -5,26 +5,22 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
         q=[]
-        res=[]
-        level=0
-        
         if root:
             q.append(root)
-        while q:
-            l=len(q)
-            res.append([])
-            for _ in range(l):
-                node=q.pop(0)
-                res[level].append(node.val)
+        res=[]
 
-                if node.left:
-                    q.append(node.left)
-                
+        while q:
+            t=0
+            l=len(q)
+            for i in range(l):
+                node=q.pop(0)
+                if i==0:
+                    res.append(node.val)
                 if node.right:
                     q.append(node.right)
-            level+=1        
+                if node.left:
+                    q.append(node.left)
         return res
-
         
