@@ -1,0 +1,12 @@
+City With Most Amenities
+
+You're given a dataset of searches for properties on Airbnb. For simplicity, each row represents a unique host.
+
+
+Your task is to find the city whose hosts collectively list the greatest total number of amenities across all their properties.
+
+
+Treat amenities as a comma-separated list and count each listed entry as-is, even if the same amenities appear multiple times within the same property's amenities, count each occurrence (do not deduplicate).
+
+
+If multiple cities tie for the highest total, return return all of those cities. Output the name of the city/cities.
