@@ -1,1 +1,3 @@
-#day145
+Most Popular Client For Calls
+
+Select the most popular client_id based on the number of users who individually have at least 50% of their events from the following list: 'video call received', 'video call sent', 'voice call received', 'voice call sent'.
