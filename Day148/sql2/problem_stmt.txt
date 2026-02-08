@@ -1,0 +1,4 @@
+Provided a table with user id and the dates they visited the platform, find the top 3 users with the longest continuous streak of visiting the platform as of August 10, 2022. Output the user ID and the length of the streak.
+
+
+In case of a tie, display all users with the top three longest streaks.
