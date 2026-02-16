@@ -8,3 +8,22 @@ from sf_events)
 select user_id
 from cte
 group by user_id,session_id having count(1)>=3
+
+--range between
+
+SELECT DISTINCT user_id
+FROM (
+    SELECT
+        user_id,
+        record_date,
+        COUNT(*) OVER (
+            PARTITION BY user_id
+            ORDER BY record_date
+            RANGE BETWEEN INTERVAL '2 days' PRECEDING AND CURRENT ROW
+        ) AS cnt
+    FROM (
+        SELECT DISTINCT user_id, record_date
+        FROM sf_events
+    ) d
+) t
+WHERE cnt >= 3;
