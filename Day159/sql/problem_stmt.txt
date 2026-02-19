@@ -1,0 +1,17 @@
+Return users and their highest consecutive user_streaks
+CREATE TABLE user_watch_activity (
+    user_id INT,
+    watch_date DATE
+);
+
+INSERT INTO user_watch_activity VALUES
+(1, '2024-01-01'),
+(1, '2024-01-02'),
+(1, '2024-01-03'),
+(1, '2024-01-06'),
+(1, '2024-01-07'),
+(2, '2024-01-01'),
+(2, '2024-01-03'),
+(2, '2024-01-04'),
+(2, '2024-01-05');
+----------------------------
