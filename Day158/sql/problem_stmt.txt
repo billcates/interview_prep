@@ -1,0 +1,28 @@
+Streaming Platform Analytics (like HBO Max)
+
+You are given a table that stores user watch activity.
+
+CREATE TABLE watch_events (
+    user_id INT,
+    show_id INT,
+    genre VARCHAR(50),
+    watch_minutes INT,
+    watch_date DATE
+);
+
+
+INSERT INTO watch_events (user_id, show_id, genre, watch_minutes, watch_date) VALUES
+(1, 101, 'Drama', 40, '2024-01-01'),
+(1, 102, 'Comedy', 30, '2024-01-02'),
+(1, 103, 'Drama', 50, '2024-01-03'),
+(1, 104, 'Comedy', 60, '2024-01-04'),
+(2, 105, 'Action', 45, '2024-01-01'),
+(2, 106, 'Action', 55, '2024-01-02'),
+(2, 107, 'Drama', 20, '2024-01-03'),
+(3, 108, 'Comedy', 25, '2024-01-01'),
+(3, 109, 'Comedy', 35, '2024-01-02'),
+(3, 110, 'Drama', 60, '2024-01-03');
+
+
+For each user, find their most watched genre based on total watch_minutes.
+If there is a tie, return ALL tied genres.
