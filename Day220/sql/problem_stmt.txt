@@ -1,1 +1,10 @@
-#day220
+Longest and Shortest Track Durations
+
+Background
+The track table stores the length of every song in milliseconds. Identifying the extreme ends of our catalog helps in analyzing track variety.
+
+Your Mission
+Write a query that provides the following information:
+A new column representing the maximum of milliseconds
+A new column representing the minimum of milliseconds
+By creating this report, you will find the duration of the longest and shortest songs, which helps the team understand the range of content available in the store.
