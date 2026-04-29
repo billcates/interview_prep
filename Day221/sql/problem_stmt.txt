@@ -1,0 +1,18 @@
+Compare Invoice to City Average
+
+Mission Background
+As a Lead Financial Analyst, you are tasked with identifying regional spending anomalies. The invoice table contains every sale, and comparing each transaction against the local city average can reveal true outliers.
+
+
+Analysis Requirements
+Calculate the average invoice total for each city
+Display each invoice alongside its city benchmark
+Maintain individual invoice details while showing the aggregate
+
+Success Criteria
+Your query must return the following columns:
+
+billing_city: The city associated with the transaction
+total: The individual invoice amount
+A column representing the average total for all invoices in that city
+Please note: The order of results does not matter.

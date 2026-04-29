@@ -1,0 +1,1 @@
+select billing_city,total,avg(total) over(partition by billing_city) as city_average from invoice
