@@ -1,0 +1,24 @@
+Flag Accounts with Suspicious Transaction Patterns
+
+Mission Background
+As a Fraud Detection Analyst, you need to flag accounts that show a sudden spike in daily spending relative to their own recent history. The transactions_660 table records individual transactions with account, date, amount, and country.
+
+
+Analysis Requirements
+Aggregate transactions to daily totals per account. For each day, compute the rolling 7-day average daily spend for that account. Flag any day where the daily total exceeds three times the rolling average. Return only flagged days with the spike ratio.
+
+
+Success Criteria
+Your result must include the following columns:
+
+account_id
+txn_date
+A new column representing total spend on that day
+A new column representing the rolling 7-day average daily spend
+A new column representing the spike ratio (daily total divided by rolling average)
+Filtering Rules:
+
+Only days where daily spend exceeds 3 times the rolling average are returned
+Ordering:
+
+By spike ratio descending
