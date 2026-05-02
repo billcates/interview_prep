@@ -1,0 +1,27 @@
+User Session Identification from Event Logs
+
+Mission Background
+As a Product Analyst, you need to identify user sessions from raw event logs. The user_events_583 table contains timestamped user events (page views, clicks, etc.). A session is defined as a sequence of events with no more than 30 minutes between consecutive events. Events more than 30 minutes apart start a new session.
+
+
+Analysis Requirements
+Identify sessions for each user by detecting gaps greater than 30 minutes. Calculate session metrics including event count, duration, and whether it was a bounce (single-event session).
+
+
+Success Criteria
+Your query must return the following columns:
+
+user_id: The user identifier
+A column representing the session number for that user (1, 2, 3...)
+A column representing the count of events in the session
+A column representing the session duration in minutes
+A column indicating if the session is a bounce (Yes/No)
+Definitions:
+
+Session gap threshold: 30 minutes
+Bounce: A session with only 1 event
+Duration: Time between first and last event (0 for bounces)
+Ordering:
+
+By user_id ascending, then by session number ascending
+This sessionization enables understanding user engagement patterns, identifying bounce rates, and measuring session quality.
