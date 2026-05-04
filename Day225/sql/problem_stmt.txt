@@ -1,0 +1,11 @@
+Mission Background
+As a Recruitment Coordinator at a tech firm, you manage a shortlist of senior engineering candidates stored in the candidates_582 table. The hiring board requires a single comma-separated summary of all candidate names, in candidate ID order, for their pre-meeting briefing document.
+
+
+Analysis Requirements
+Write a query that produces exactly one output row containing all candidate names joined into a single comma-separated string, ordered by candidate ID.
+
+
+Success Criteria
+A new column containing all candidate names concatenated into one comma-separated string, in candidate ID order
+Please note: The order of results does not matter.
