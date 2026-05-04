@@ -1,0 +1,17 @@
+Identify Missing Date Ranges
+
+Mission Background
+As a Systems Administrator, you monitor a critical service that should run every day. The service_log_361 table records each date when the service was confirmed active, but some dates are missing from the log.
+
+
+Analysis Requirements
+Determine all dates within the full log span where no activity was recorded, then consolidate consecutive missing dates into contiguous ranges showing each range's start date, end date, and total duration in days.
+
+
+Success Criteria
+A column showing the first missing date in each contiguous gap
+A column showing the last missing date in each contiguous gap
+A new column representing the total number of consecutive missing days in that gap
+Ordering:
+
+By range start date ascending
