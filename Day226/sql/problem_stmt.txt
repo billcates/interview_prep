@@ -1,0 +1,21 @@
+Generate Date Spine Fill Missing Dates
+
+Mission Background
+As a BI Engineer, you need to produce a complete daily revenue chart but the sales_sparse_752 table only contains days where sales actually occurred. Missing dates must appear with zero revenue so the chart has no gaps.
+
+
+Analysis Requirements
+Generate every date from the minimum to maximum date in the sales table using a recursive CTE. Then left join the actual sales onto this complete date spine so that days with no sales show a revenue of zero.
+
+
+Success Criteria
+Your result must contain:
+
+A new column representing each date in the full range
+A new column representing the revenue for that date (0 if no sale occurred)
+Filtering Rules:
+
+Include all dates from the first to last sale date inclusive
+Ordering:
+
+By date ascending
