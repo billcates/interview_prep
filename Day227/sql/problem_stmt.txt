@@ -1,0 +1,21 @@
+Abnormal Hire Gap Detection
+
+Mission Background
+As an HR Analyst, you want to identify periods of stagnant hiring. The employees table tracks hire dates that can reveal gaps in recruitment activity.
+
+
+Analysis Requirements
+Order employees by their hire date
+Calculate the number of days between each hire and the previous hire
+Identify employees hired after unusually long gaps
+
+Success Criteria
+Your query must return the following columns:
+
+first_name: The employee first name
+last_name: The employee last name
+A column representing the days since the previous hire
+Filtering Rules:
+
+Only employees where the hire gap exceeds 300 days
+Please note: The order of results does not matter.
