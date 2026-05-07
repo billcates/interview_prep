@@ -1,0 +1,21 @@
+Global freight accumulation milestone
+
+Mission Background
+As a Finance Analyst, you are tracking total operational costs over time. The orders table contains freight data that can reveal when cumulative shipping costs crossed significant milestones.
+
+
+Analysis Requirements
+Calculate a running total of freight costs across all orders
+Order the calculation chronologically
+Identify when the cumulative freight reached specific thresholds
+
+Success Criteria
+Your query must return the following columns:
+
+order_id: The order identifier
+order_date: The order date
+A column representing the running sum of freight
+Filtering Rules:
+
+Only orders where the accumulated freight is between 10000 and 11000
+Please note: The order of results does not matter.
