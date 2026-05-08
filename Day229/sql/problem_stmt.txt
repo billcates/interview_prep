@@ -1,0 +1,18 @@
+Find the Middle Restaurants
+
+Mission Background
+As a hospitality awards coordinator, you are reviewing a shortlist of 10 restaurants stored in the restaurants_623 table. A judge has asked for the two middle-ranked restaurants as a calibration reference, without hardcoding positions. The query must work regardless of how many restaurants are in the list.
+
+
+Analysis Requirements
+Write a query that dynamically identifies and returns the two middle-ranked restaurants, without hardcoding any row numbers or position values.
+
+
+Success Criteria
+The restaurant name
+Filtering Rules:
+
+Return only the two rows at positions total divided by 2 and total divided by 2 plus 1
+Ordering:
+
+By restaurant ID ascending
