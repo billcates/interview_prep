@@ -1,0 +1,19 @@
+Assign Speakers To Rooms
+
+Mission Background
+As a Conference Organizer, you have a table of all possible speaker and room combinations. The conference_slots_645 table lists every speaker paired with every available room.
+
+
+Analysis Requirements
+From the full grid of combinations, produce a unique one to one assignment so that each speaker gets exactly one distinct room and no room is assigned to more than one speaker. Assign rooms in alphabetical order to speakers in alphabetical order.
+
+
+Success Criteria
+speaker_name
+A new column representing the uniquely assigned room
+Each speaker appears exactly once
+Each room appears exactly once
+The first alphabetical speaker gets the first alphabetical room, and so on
+Ordering:
+
+By speaker name ascending
