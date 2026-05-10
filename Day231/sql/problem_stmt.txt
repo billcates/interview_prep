@@ -1,0 +1,17 @@
+Rank Distribution Center Coverage
+
+Mission Background
+As a Logistics Director, you oversee four regional distribution centers. The product_matrix_385 table records which product categories each center handles, using 1 (handles) and 0 (does not handle) indicators in separate columns for each center.
+
+
+Analysis Requirements
+Determine how many product categories each distribution center covers, and rank the centers from highest to lowest coverage.
+
+
+Success Criteria
+A column showing the distribution center name
+A new column representing the total number of categories that center handles
+A new column representing the ranking position based on category count (ties share the same rank)
+Ordering:
+
+By category count descending
