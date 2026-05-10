@@ -1,0 +1,23 @@
+Coding Challenge
+
+You have a PySpark DataFrame:
+
+customer_id
+order_date
+amount
+
+Requirement:
+
+For every customer, calculate:
+
+current order amount
+previous order amount
+difference from previous order
+
+Expected output:
+
+customer_id
+order_date
+amount
+prev_amount
+diff
