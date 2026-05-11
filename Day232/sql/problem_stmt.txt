@@ -1,0 +1,17 @@
+Forward Fill Missing Values
+
+Mission Background
+As a Logistics Data Analyst, you are working with the delivery_log_851 table. Due to a data entry shortcut, the region and city were only recorded for the first package in each group. Subsequent rows have NULL for these fields, but they belong to the same region and city as the last non-null entry above them.
+
+
+Analysis Requirements
+Fill every NULL region and city with the most recent non-null value that precedes it (based on the row ID ordering). Every row should display a complete region, city, and package code.
+
+
+Success Criteria
+A new column representing the filled region (never NULL)
+A new column representing the filled city (never NULL)
+The package code
+Ordering:
+
+By row ID ascending
