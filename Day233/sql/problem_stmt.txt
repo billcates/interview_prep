@@ -1,0 +1,24 @@
+Pivot Revenue by Product Category
+
+Mission Background
+As a Sales Analyst, you need to compare category revenue side by side for each month. The monthly_sales_365 table stores revenue in long format with one row per month and category combination.
+
+
+Analysis Requirements
+Transform the data into wide format so each month appears on one row with separate columns for Electronics, Clothing, and Home revenue. Also include a column for total revenue across all three categories for that month.
+
+
+Success Criteria
+Your result must contain:
+
+sale_month
+A new column representing total Electronics revenue for that month
+A new column representing total Clothing revenue for that month
+A new column representing total Home revenue for that month
+A new column representing the combined total revenue for that month
+Filtering Rules:
+
+Include all months and all categories
+Ordering:
+
+By sale_month ascending
