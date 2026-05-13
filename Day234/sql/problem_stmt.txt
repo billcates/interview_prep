@@ -1,0 +1,22 @@
+Running Average Score per Student Across Exams
+
+Mission Background
+As an Academic Coordinator, you want to track whether each student is improving over their exam history. The exam_results_628 table records individual exam scores per student across multiple subjects and dates.
+
+
+Analysis Requirements
+For each exam result, show the score alongside the student running average across all exams taken up to and including that date. Also include a percentage score for each exam.
+
+
+Success Criteria
+Every exam result row should appear. The output must include:
+
+student_name
+exam_date
+subject
+score
+A new column representing percentage score rounded to one decimal place
+A new column representing running average score for the student up to this exam, rounded to one decimal place
+Ordering:
+
+By student name ascending, then exam date ascending
