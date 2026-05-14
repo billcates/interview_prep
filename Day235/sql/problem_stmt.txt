@@ -1,0 +1,25 @@
+Price Change Direction per Product Over Time
+
+Mission Background
+As a Pricing Analyst, you need to track how prices have evolved for each product over time. The price_history_659 table records price changes with effective dates.
+
+
+Analysis Requirements
+For each price record, retrieve the previous price for the same product and compute the absolute change. Label the direction as Increase, Decrease, or Unchanged. Exclude the very first price record for each product since there is no prior price to compare against.
+
+
+Success Criteria
+Your result must include the following columns:
+
+product_name
+effective_date
+unit_price
+A new column representing the previous price
+A new column representing the price change amount
+A new column classifying the direction as Increase, Decrease, or Unchanged
+Filtering Rules:
+
+Only rows with a previous price are returned (first record per product excluded)
+Ordering:
+
+By product_name ascending, then effective_date ascending
