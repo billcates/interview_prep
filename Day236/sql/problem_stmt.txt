@@ -1,0 +1,23 @@
+Top Revenue Store per Region
+
+Mission Background
+As a Retail Operations Manager, you need to identify the highest-performing store in each region. The stores_655 table holds store details and store_sales_655 records individual sales transactions.
+
+
+Analysis Requirements
+Compute total revenue per store, rank stores within their region by revenue, and return only the top-ranked store per region.
+
+
+Success Criteria
+Your result must include the following columns:
+
+Store name
+Region
+A new column representing total revenue
+A new column representing the rank within the region
+Filtering Rules:
+
+Only the rank 1 store per region is returned
+Ordering:
+
+By total revenue descending
