@@ -1,0 +1,23 @@
+Second Highest Salary per Department
+
+Mission Background
+As an HR Analyst, you need to identify the second-highest earner in each department for a compensation benchmarking report. The staff_salaries_531 table holds one row per employee with their salary and department.
+
+
+Analysis Requirements
+Rank employees by salary within each department and return only those with a rank of exactly 2. Use dense ranking so ties at rank 1 do not skip rank 2.
+
+
+Success Criteria
+Your result must contain:
+
+department
+staff_name
+salary
+A new column representing the salary rank within the department
+Filtering Rules:
+
+Only employees ranked exactly 2 within their department
+Ordering:
+
+By department ascending
